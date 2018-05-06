@@ -11,7 +11,7 @@
 
 # Run the code
   - Open the project in android studio and Emulate an android device.
-  OR
+  </br><i>Or</i>
   - Copy the mindera_challenge.apk to your android phone and run it.
 
 # What was left undone?
