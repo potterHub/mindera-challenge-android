@@ -1,4 +1,3 @@
-## mindera-challenge-android
 # Description
   - This repository was created in order to solve the Mindera Graduate Challenge (https://minderacraft.workable.com/jobs/490096).
   
