@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Meet Mindera</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="gallery">Gallery</string>
+    <string name="importer" >Import</string>
+    <string name="slideshow">Slideshow</string>
+    <string name="tools">Tools</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+
+    <!-- android tab options -->
+    <string name="tab_events">Events</string>
+    <string name="tab_vacancies">Vacancies</string>
+    <string name="hint_search">search event</string>
+
+    <!-- dummy user data for the navigation menu header -->
+    <string name="dummy_user_name">Pedro Moura</string>
+    <string name="dummy_user_email">pedro_moura@email.com</string>
+
+    <!-- android events dummy options -->
+    <string-array name="Events">
+        <item>Open Day ´18</item>
+        <item>Graduate Pogram</item>
+        <item>Meet Mindera Code &amp; Culture</item>
+    </string-array>
+</resources>

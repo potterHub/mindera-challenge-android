@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
+    android:orientation="vertical"
+    android:layout_marginBottom="10sp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/event_card_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:scaleType="fitXY"
+            android:src="@drawable/gray" />
+    </RelativeLayout>
+
+</LinearLayout>
