@@ -21,16 +21,19 @@
     <!-- android tab options -->
     <string name="tab_events">Events</string>
     <string name="tab_vacancies">Vacancies</string>
-    <string name="hint_search">search event</string>
+    <string name="hint_search">search mEvent</string>
 
     <!-- dummy user data for the navigation menu header -->
     <string name="dummy_user_name">Pedro Moura</string>
     <string name="dummy_user_email">pedro_moura@email.com</string>
 
     <!-- android events dummy options -->
-    <string-array name="Events">
+    <string-array name="events">
         <item>Open Day ´18</item>
         <item>Graduate Pogram</item>
         <item>Meet Mindera Code &amp; Culture</item>
     </string-array>
+
+    <!-- mindera title with formating style -->
+    <string name="mindera_title">%1$s _ %2$s</string>
 </resources>

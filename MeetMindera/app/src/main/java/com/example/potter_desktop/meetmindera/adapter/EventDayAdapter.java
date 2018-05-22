@@ -17,62 +17,59 @@ import com.example.potter_desktop.meetmindera.data.EventOrganised;
 import com.example.potter_desktop.meetmindera.ui.activity.DayListActivity;
 
 public class EventDayAdapter extends RecyclerView.Adapter<EventDayAdapter.EventItemCardHolder> {
-    private EventOrganised event;
-
     private Context mContext;
+    private EventOrganised mEvent;
 
     public EventDayAdapter(Context context) {
         this.mContext = context;
     }
 
-    public void setEvent(EventOrganised event) {
-        this.event = event;
+    public void setEvent(EventOrganised mEvent) {
+        this.mEvent = mEvent;
     }
 
     @Override
     public EventItemCardHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.event_day_card, null);
-        EventItemCardHolder card_holder = new EventItemCardHolder(view);
-        return card_holder;
+        EventItemCardHolder cardHolder = new EventItemCardHolder(view);
+        return cardHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventItemCardHolder holder, int position) {
-        EventDay item = event.getEventDayList().get(position);
-        holder.setItem(item);
+        final EventDay item = mEvent.getEventDayList().get(position);
+        holder.mDay = item;
+        holder.mTitleEventItem.setText(item.getDay());
+
+        // when clicking in a card from mEvent
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, DayListActivity.class);
+                intent.putExtra(AppData.EVENT_NAME_EXTRA, mEvent.getEventName());
+                intent.putExtra(AppData.EVENT_DAY_EXTRA, item);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return (null != event.getEventDayList() ? event.getEventDayList().size() : 0);
+        return (null != mEvent.getEventDayList() ? mEvent.getEventDayList().size() : 0);
     }
 
-    public class EventItemCardHolder extends RecyclerView.ViewHolder {
-        private EventDay day;
-        private ImageView item_image;
-        private TextView title_event_item;
+    public static class EventItemCardHolder extends RecyclerView.ViewHolder {
+        public View mCardView;
+        public EventDay mDay;
+        public ImageView mItemImage;
+        public TextView mTitleEventItem;
 
-        public EventItemCardHolder(View view) {
+        public EventItemCardHolder(final View view) {
             super(view);
 
-            this.item_image = view.findViewById(R.id.event_card_item_image);
-            this.title_event_item = view.findViewById(R.id.event_card_item_title);
-
-            // when clicking in a card from event
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, DayListActivity.class);
-                    intent.putExtra(AppData.EVENT_NAME_EXTRA, event.getEventName());
-                    intent.putExtra(AppData.EVENT_DAY_EXTRA, day);
-                    mContext.startActivity(intent);
-                }
-            });
-        }
-
-        public void setItem(EventDay day) {
-            this.day = day;
-            this.title_event_item.setText(day.getDay());
+            mItemImage = view.findViewById(R.id.event_card_item_image);
+            mTitleEventItem = view.findViewById(R.id.event_card_item_title);
+            mCardView = view.findViewById(R.id.card_event_day_view);
         }
     }
 }

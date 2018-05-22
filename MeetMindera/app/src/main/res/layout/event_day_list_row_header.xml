@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="?android:selectableItemBackground"
     android:orientation="vertical"
-    android:layout_marginBottom="10sp">
+    android:layout_marginBottom="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/event_card_item_image"
             android:layout_width="match_parent"
-            android:layout_height="200sp"
+            android:layout_height="200dp"
             android:scaleType="fitXY"
             android:src="@drawable/gray" />
     </RelativeLayout>

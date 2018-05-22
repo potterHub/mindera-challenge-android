@@ -14,20 +14,21 @@ import com.example.potter_desktop.meetmindera.R;
 import com.example.potter_desktop.meetmindera.data.EventOrganised;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventRowHolder> {
-    private ArrayList<EventOrganised> event_lists;
+    private List<EventOrganised> mEventLists;
     private Context mContext;
 
-    public EventAdapter(Context context, ArrayList<EventOrganised> all_events) {
+    public EventAdapter(Context context) {
+        this.mEventLists = new ArrayList<>();
         this.mContext = context;
-        this.event_lists = all_events;
     }
 
     @NonNull
     @Override
     public EventRowHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        // case 0 the is the event header
+        // case 0 the is the mEvent header
         View view;
         if (i == 1) {
             // first row
@@ -48,64 +49,64 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventRowHold
     @Override
     public void onBindViewHolder(@NonNull EventRowHolder holder, int i) {
         if(i > 0) {
-            holder.setEvent(event_lists.get(i - 1));
+            holder.setEvent(mEventLists.get(i - 1));
             holder.setEventItemAdapter(mContext);
         }
     }
 
     public void setEventLists(ArrayList<EventOrganised> events) {
-        event_lists.clear();
-        event_lists.addAll(events);
+        mEventLists.clear();
+        mEventLists.addAll(events);
         notifyDataSetChanged();
     }
 
     public void addEvent(int position, EventOrganised event) {
-        event_lists.add(position, event);
+        mEventLists.add(position, event);
         notifyItemInserted(position);
     }
 
     @Override
     public int getItemCount() {
-        return (null != event_lists ? event_lists.size() + 1 : 1);
+        return (null != mEventLists ? mEventLists.size() + 1 : 1);
     }
 
     public class EventRowHolder extends RecyclerView.ViewHolder {
-        private boolean first_row;
-        private TextView event_title;
-        private RecyclerView recycler_view_event_list;
-        private EventOrganised event;
+        private boolean mFirstRow;
+        private TextView mEventTitle;
+        private RecyclerView mRecyclerViewEventList;
+        private EventOrganised mEvent;
 
-        public EventRowHolder(View view,int row) {
+        public EventRowHolder(View view, int row) {
             super(view);
-            this.first_row = (row == 0);
-            if (!first_row) {
-                this.event_title = view.findViewById(R.id.event_row_title);
-                this.recycler_view_event_list = view.findViewById(R.id.recycler_view_list);
+            this.mFirstRow = (row == 0);
+            if (!mFirstRow) {
+                this.mEventTitle = view.findViewById(R.id.event_row_title);
+                this.mRecyclerViewEventList = view.findViewById(R.id.recycler_view_list);
             }
         }
 
         private void setEvent(EventOrganised event) {
-            if (event != null && !first_row) {
-                this.event = event;
-                this.event_title.setText(event.getEventName());
+            if (event != null && !mFirstRow) {
+                this.mEvent = event;
+                this.mEventTitle.setText(event.getEventName());
             }
         }
 
         private void setEventItemAdapter(Context mContext) {
-            if(!first_row) {
-                EventDayAdapter item_adapter = new EventDayAdapter(mContext);
-                item_adapter.setEvent(this.event);
+            if(!mFirstRow) {
+                EventDayAdapter mItemAdapter = new EventDayAdapter(mContext);
+                mItemAdapter.setEvent(this.mEvent);
 
-                recycler_view_event_list.setHasFixedSize(true);
-                recycler_view_event_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-                recycler_view_event_list.addItemDecoration(new RecyclerView.ItemDecoration() {
+                mRecyclerViewEventList.setHasFixedSize(true);
+                mRecyclerViewEventList.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+                mRecyclerViewEventList.addItemDecoration(new RecyclerView.ItemDecoration() {
                     @Override
                     public void getItemOffsets(Rect outRect, View view,
                                                RecyclerView parent, RecyclerView.State state) {
                         outRect.right = EventAdapter.this.mContext.getResources().getDimensionPixelSize(R.dimen.event_item_spacing);
                     }
                 });
-                recycler_view_event_list.setAdapter(item_adapter);
+                mRecyclerViewEventList.setAdapter(mItemAdapter);
             }
         }
     }

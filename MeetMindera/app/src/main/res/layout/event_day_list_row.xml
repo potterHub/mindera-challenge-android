@@ -5,10 +5,10 @@
 
     android:background="?android:selectableItemBackground"
     android:orientation="vertical"
-    android:paddingTop="10sp"
-    android:paddingBottom="10sp"
-    android:paddingStart="10sp"
-    android:paddingEnd="0sp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"

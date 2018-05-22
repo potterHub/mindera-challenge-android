@@ -13,9 +13,10 @@ import com.example.potter_desktop.meetmindera.adapter.EventDayListRowDescription
 import com.example.potter_desktop.meetmindera.application.AppData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DescriptionGridActivity extends AppCompatActivity {
-    private ArrayList<String> descriptions;
+    private List<String> descriptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class DescriptionGridActivity extends AppCompatActivity {
         setContentView(R.layout.activity_description_grid);
 
         // retrive descriptions list and the name of the day activity
-        descriptions = getIntent().getStringArrayListExtra(AppData.DESCRIPTIONS);
+        this.descriptions = getIntent().getStringArrayListExtra(AppData.DESCRIPTIONS);
         String activity_name = getIntent().getStringExtra(AppData.NAME_ACTIVITY);
 
         // set action bar
@@ -38,10 +39,12 @@ public class DescriptionGridActivity extends AppCompatActivity {
             actionBar.show();
         }
 
-        RecyclerView recycler_view = findViewById(R.id.recycler_description_grid_id);
-        EventDayListRowDescriptionAdapter myAdapter = new EventDayListRowDescriptionAdapter(this, this.descriptions);
-        recycler_view.setLayoutManager(new GridLayoutManager(this, 2));
-        recycler_view.setAdapter(myAdapter);
+        RecyclerView recyclerView = findViewById(R.id.recycler_description_grid_id);
+        EventDayListRowDescriptionAdapter myAdapter = new EventDayListRowDescriptionAdapter();
+        myAdapter.setDescriptions(this.descriptions);
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setAdapter(myAdapter);
     }
 
     // to make home button(back button on top) to act as back button on bottom

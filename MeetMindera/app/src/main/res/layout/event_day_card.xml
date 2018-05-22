@@ -13,7 +13,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/card_event_day_view">
 
             <ImageView
                 android:id="@+id/event_card_item_image"
@@ -29,7 +30,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_horizontal"
-                android:paddingBottom="5sp"
+                android:paddingBottom="5dp"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </RelativeLayout>

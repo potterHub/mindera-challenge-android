@@ -1,13 +1,15 @@
 package com.example.potter_desktop.meetmindera.ui.activity;
 
 
+import android.content.res.Resources;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.example.potter_desktop.meetmindera.R;
 import com.example.potter_desktop.meetmindera.adapter.EventDayListRowAdapter;
@@ -15,8 +17,8 @@ import com.example.potter_desktop.meetmindera.application.AppData;
 import com.example.potter_desktop.meetmindera.data.EventDay;
 
 public class DayListActivity extends AppCompatActivity {
-    private String event_name;
-    private EventDay event_item;
+    private String mEventName;
+    private EventDay mEventItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,8 @@ public class DayListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_day_activities_list);
 
         // retrieve event class
-        this.event_item = (EventDay) getIntent().getSerializableExtra(AppData.EVENT_DAY_EXTRA);
-        this.event_name = getIntent().getStringExtra(AppData.EVENT_NAME_EXTRA);
+        this.mEventItem = (EventDay) getIntent().getSerializableExtra(AppData.EVENT_DAY_EXTRA);
+        this.mEventName = getIntent().getStringExtra(AppData.EVENT_NAME_EXTRA);
 
         // set action bar
         Toolbar toolbar = findViewById(R.id.toolbar_list_activity);
@@ -34,19 +36,26 @@ public class DayListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            if (event_item != null && event_name != null)
-                actionBar.setTitle(event_name + " _ " + event_item.getDay());
+            Resources res = getResources();
+            String title = String.format(res.getString(R.string.mindera_title), mEventName, mEventItem.getDay());
+            if (mEventItem != null && mEventName != null)
+                actionBar.setTitle(title);
             actionBar.show();
         }
 
-        ListView list_view = findViewById(R.id.activity_list_view);
+        if(mEventItem != null) {
 
-        if(event_item != null) {
-            // instantiate the adapter
-            EventDayListRowAdapter listAdapter = new EventDayListRowAdapter(DayListActivity.this, event_item.getEventDayActivities());
+            RecyclerView recyclerView = findViewById(R.id.activity_recycler_view);
+            recyclerView.setHasFixedSize(true);
+            EventDayListRowAdapter adapter = new EventDayListRowAdapter(this);
+            adapter.setData(mEventItem.getEventDayActivities());
 
-            //attach the adapter to the list
-            list_view.setAdapter(listAdapter);
+            LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), manager.getOrientation());
+            recyclerView.addItemDecoration(dividerItemDecoration);
+
+            recyclerView.setLayoutManager(manager);
+            recyclerView.setAdapter(adapter);
         }
     }
 

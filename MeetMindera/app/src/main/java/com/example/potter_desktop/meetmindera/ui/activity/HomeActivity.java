@@ -27,7 +27,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout drawer;
+    private DrawerLayout mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,52 +38,52 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar_menu);
         setSupportActionBar(toolbar);
 
-        // get drawer
-        drawer = findViewById(R.id.drawer_layout);
+        // get mDrawer
+        mDrawer = findViewById(R.id.drawer_layout);
 
         // get views (listener to the menu buttons)
-        NavigationView navigation_view = findViewById(R.id.nav_view);
-        navigation_view.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
-        View nav_header = navigation_view.getHeaderView(0);
+        View navHeader = navigationView.getHeaderView(0);
         // Navigation view header
-        TextView nav_edit_text_name = nav_header.findViewById(R.id.nav_name_text_view);
-        TextView nav_edit_text_email = nav_header.findViewById(R.id.nav_email_text_view);
+        TextView navEditTextName = navHeader.findViewById(R.id.nav_name_text_view);
+        TextView navEditTextEmail = navHeader.findViewById(R.id.nav_email_text_view);
 
         // customize header
-        nav_edit_text_name.setText(getResources().getString(R.string.dummy_user_name));
-        nav_edit_text_email.setText(getResources().getString(R.string.dummy_user_email));
+        navEditTextName.setText(getResources().getString(R.string.dummy_user_name));
+        navEditTextEmail.setText(getResources().getString(R.string.dummy_user_email));
 
         // make the button on top
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         // deactivate toggle animation
         toggle.setDrawerSlideAnimationEnabled(false);
-        drawer.addDrawerListener(toggle);
+        mDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
         // create tab adapter
-        String tab_events = getResources().getString(R.string.tab_events);
-        String tab_vacancies = getResources().getString(R.string.tab_vacancies);
+        String tabEvents = getResources().getString(R.string.tab_events);
+        String tabVacancies = getResources().getString(R.string.tab_vacancies);
 
         TabListAdapter tab_adapter = new TabListAdapter(getSupportFragmentManager());
-        tab_adapter.addFragment(new Events(), tab_events != null ? tab_events : "tab 1");
-        tab_adapter.addFragment(new Vacancies(), tab_vacancies != null ? tab_vacancies : "tab 2");
+        tab_adapter.addFragment(new Events(), tabEvents != null ? tabEvents : "1");
+        tab_adapter.addFragment(new Vacancies(), tabVacancies != null ? tabVacancies : "2");
 
         // get viewPage adapter and set the tab_adapter
-        ViewPager v_page = findViewById(R.id.view_pager);
-        v_page.setAdapter(tab_adapter);
+        ViewPager vPage = findViewById(R.id.view_pager);
+        vPage.setAdapter(tab_adapter);
 
         // add view pager with the fragment adapter to the tablayout
         TabLayout tabLayout = findViewById(R.id.event_tab_layout);
-        tabLayout.setupWithViewPager(v_page);
+        tabLayout.setupWithViewPager(vPage);
     }
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+            mDrawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -107,40 +107,42 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setChecked(true);
-        drawer.closeDrawers();
+        mDrawer.closeDrawers();
         return false;
     }
 
     // adapter to show the list tabs
     public static class TabListAdapter extends FragmentStatePagerAdapter {
-        private final List<Fragment> tab_frags = new ArrayList<>();
-        private final List<String> tab_titles = new ArrayList<>();
+        private final List<Fragment> mTabFrags;
+        private final List<String> mTabTitles;
 
         public TabListAdapter(FragmentManager fm) {
             super(fm);
+            mTabFrags = new ArrayList<>();
+            mTabTitles = new ArrayList<>();
         }
 
         public void addFragment(Fragment frag, String title) {
             if (frag != null && title != null) {
-                tab_frags.add(frag);
-                tab_titles.add(title);
+                mTabFrags.add(frag);
+                mTabTitles.add(title);
             }
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return tab_titles.get(position);
+            return mTabTitles.get(position);
         }
 
         @Override
         public Fragment getItem(int position) {
             // return fragment
-            return tab_frags.get(position);
+            return mTabFrags.get(position);
         }
 
         @Override
         public int getCount() {
-            return tab_frags.size();
+            return mTabFrags.size();
         }
     }
 }

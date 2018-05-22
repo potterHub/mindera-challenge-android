@@ -1,44 +1,43 @@
 package com.example.potter_desktop.meetmindera.data;
 
-import com.example.potter_desktop.meetmindera.ui.activity.DayListActivity;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class EventDay implements Serializable{
-    private String day;
-    private ArrayList<DayActivity> event_day_activity;
+    private String mDay;
+    private List<DayActivity> mEventDayActivity;
 
     public EventDay(String day) {
-        this.event_day_activity = new ArrayList<>();
-        this.day = day;
+        this.mEventDayActivity = new ArrayList<>();
+        this.mDay = day;
     }
 
     public String getDay() {
-        return day;
+        return mDay;
     }
 
     public void setDay(String day) {
-        this.day = day;
+        this.mDay = day;
     }
 
-    public ArrayList<DayActivity> getEventDayActivities() {
-        return event_day_activity;
+    public List<DayActivity> getEventDayActivities() {
+        return mEventDayActivity;
     }
 
-    public void setEventDayActivities(ArrayList<DayActivity> event_day_activities) {
-        this.event_day_activity = event_day_activities;
+    public void setEventDayActivities(List<DayActivity> event_day_activities) {
+        this.mEventDayActivity = event_day_activities;
     }
 
     public void generateDayActivities(int size){
         Random rand = new Random();
-        this.event_day_activity.clear();
+        this.mEventDayActivity.clear();
         for (int j = 1; j <= size; j++) {
             String list = "List " + (j >= 10 ? "" : "0" ) + j;
             DayActivity activity = new DayActivity(list);
             activity.generateDescriptions(16 + rand.nextInt(6));
-            this.event_day_activity.add(activity);
+            this.mEventDayActivity.add(activity);
         }
     }
 }

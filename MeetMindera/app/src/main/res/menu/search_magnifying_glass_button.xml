@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- search for event search_magnifying_glass_button -->
+    <!-- search for mEvent search_magnifying_glass_button -->
     <item
         android:id="@+id/search_mag_glass"
         android:icon="@drawable/ic_search_white_24dp"

@@ -2,29 +2,30 @@ package com.example.potter_desktop.meetmindera.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DayActivity implements Serializable {
-    private String activity_name;
-    private ArrayList<String> list_descriptions;
+    private String mActivityName;
+    private List<String> mListDescriptions;
 
-    public DayActivity(String activity_name) {
-        this.activity_name = activity_name;
-        this.list_descriptions = new ArrayList<>();
+    public DayActivity(String activityName) {
+        this.mActivityName = activityName;
+        this.mListDescriptions = new ArrayList<>();
     }
 
     public String getActivityName() {
-        return this.activity_name;
+        return this.mActivityName;
     }
 
-    public ArrayList<String> getListDescriptions() {
-        return list_descriptions;
+    public List<String> getListDescriptions() {
+        return mListDescriptions;
     }
 
     public void generateDescriptions(int size) {
-        this.list_descriptions.clear();
+        this.mListDescriptions.clear();
         for (int j = 1; j <= size; j++) {
             String description = "Description " + (j >= 10 ? "" : "0") + j;
-            this.list_descriptions.add(description);
+            this.mListDescriptions.add(description);
         }
     }
 }
